@@ -17,10 +17,8 @@ def dijkstras_shortest_path(src, dst, graph, adj):
             break
 
         for next_node in adj(graph, node):
-            alt = dist[node[1]] + next_node[0]
-
-            if next_node[1] not in dist or alt < dist[next_node[1]]:
-                dist[next_node[1]] = alt
+            if next_node[1] not in dist or next_node[0] < dist[next_node[1]]:
+                dist[next_node[1]] = next_node[0]
                 prev[next_node[1]] = node[1]
                 heappush(heap, next_node)
 
