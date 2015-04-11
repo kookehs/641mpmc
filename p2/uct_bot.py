@@ -66,7 +66,7 @@ def UCT(rootstate, quip):
 
   quip("DEPTH: " + str(depth))
   quip("ELAPSED: " + str(elapsed))
-  quip("ROLLOUTS/SECOND: " + str(detph / elapsed))
+  quip("ROLLOUTS/SECOND: " + str(depth / elapsed))
 
   return sorted(rootnode.childNodes, key = lambda c: c.visits)[-1].move
 
