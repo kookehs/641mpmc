@@ -1,8 +1,8 @@
 from Tkinter import *
 from p2_game import Game, State
 
-import first_bot as red_bot
-import first_bot as blue_bot
+import greedy_bot as red_bot
+import greedy_bot as blue_bot
 BOTS = {'red': red_bot, 'blue': blue_bot}
 
 
@@ -37,7 +37,7 @@ def display(state):
 		else:
 			line = canvas.create_line(x,y,x+step,y,width=w,dash=(w,w),fill=state.whos_turn)
 			canvas.tag_bind(line,"<Button-1>",make_callback(('h',(i,j))))
-			
+
 	for i,j in state.game.v_lines:
 		x = (i+0.5)*step
 		y = (j+0.5)*step
@@ -47,7 +47,7 @@ def display(state):
 		else:
 			line = canvas.create_line(x,y,x,y+step,width=w,dash=(w,w),fill=state.whos_turn)
 			canvas.tag_bind(line,"<Button-1>",make_callback(('v',(i,j))))
-			
+
 	for i,j in state.game.boxes:
 		x = (i+0.5)*step
 		y = (j+0.5)*step

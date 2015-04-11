@@ -1,11 +1,11 @@
 from p2_game import Game, State
 from collections import defaultdict
 
-import first_bot as red_bot
-import first_bot as blue_bot
+import greedy_bot as red_bot
+import uct_bot as blue_bot
 BOTS = {'red': red_bot, 'blue': blue_bot}
 
-rounds = 100
+rounds = 10
 wins = defaultdict(lambda: 0)
 
 for i in range(rounds):
@@ -15,12 +15,12 @@ for i in range(rounds):
 
   game = Game(4)
   state = State(game)
-  
+
   def make_quipper(who):
     def quip(what):
       print who, ">>", what
     return quip
-  
+
   while not state.is_terminal():
     move = BOTS[state.whos_turn].think(state.copy(), make_quipper(state.whos_turn))
     state.apply_move(move)
