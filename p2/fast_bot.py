@@ -14,8 +14,8 @@ class Node:
     self.playerJustMoved = otherPlayer
 
   def UCTSelectChild(self):
-    # return sorted(self.childNodes, key = lambda c: float(c.score) / float(c.visits) + sqrt(2 * log(self.visits) / c.visits))[-1]
-    return sorted(self.childNodes, key = lambda c: c.score + sqrt(2 * log(self.visits) / c.visits))[-1]
+    return sorted(self.childNodes, key = lambda c: float(c.score) / float(c.visits) + sqrt(2 * log(float(self.visits)) / float(c.visits)))[-1]
+    # return sorted(self.childNodes, key = lambda c: c.score + sqrt(2 * log(float(self.visits)) / float(c.visits)))[-1]
 
   def AddChild(self, m, s, otherPlayer):
     n = Node(move = m, parent = self, state = s, otherPlayer = otherPlayer)
@@ -34,6 +34,7 @@ def UCT(rootstate, quip):
   opposite = {"blue" : "red", "red" : "blue"}
   currentPlayer = rootstate.get_whos_turn()
   rootnode = Node(state = rootstate, otherPlayer = opposite[currentPlayer])
+  iterations = 0
 
   while elapsed < 1:
     node = rootnode
@@ -63,10 +64,11 @@ def UCT(rootstate, quip):
       node = node.parentNode
 
     elapsed = time() - start
+    iterations += 1
 
   quip("DEPTH: " + str(depth))
   quip("ELAPSED: " + str(elapsed))
-  quip("ROLLOUTS/SECOND: " + str(depth / elapsed))
+  quip("ITERATIONS/SECOND: " + str(iterations / elapsed))
 
   return sorted(rootnode.childNodes, key = lambda c: c.visits)[-1].move
 
