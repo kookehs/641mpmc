@@ -41,7 +41,7 @@ def redraw():
 
   for box in visited_boxes:
     x1,x2,y1,y2 = shrink(box)
-    canvas.create_rectangle(y1,x1,y2,x2,outline='pink')
+    canvas.create_rectangle(y1,x1,y2,x2,outline='green')
 
   for segment in path:
     x1,y1 = shrink(segment[0])
@@ -77,7 +77,7 @@ def on_click(event):
     destination_point = event.y*SUBSAMPLE, event.x*SUBSAMPLE
 
     try:
-      path, visited_boxes = p3_pathfinder.find_path(source_point, destination_point, mesh) 
+      path, visited_boxes = p3_pathfinder.find_path(source_point, destination_point, mesh)
     except:
       destination_point = None
       traceback.print_exc()
