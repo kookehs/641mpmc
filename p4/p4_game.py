@@ -29,7 +29,7 @@ class World:
     clazz = obj.__class__
     if obj not in self.objects_by_class[clazz]:
       self.objects_by_class[clazz].append(obj)
- 
+
   def unregister(self, obj):
     """remove a GameObject from the all_objects and objects_by_class lists"""
     assert isinstance(obj, GameObject)
@@ -67,7 +67,7 @@ class World:
             fill='',
             width=2.0)
 
-    # draw the user's partial selection box 
+    # draw the user's partial selection box
     if self.sel_a and self.sel_b:
       top_left = (min(self.sel_a[0], self.sel_b[0]), min(self.sel_a[1], self.sel_b[1]))
       bottom_right = (max(self.sel_a[0], self.sel_b[0]), max(self.sel_a[1], self.sel_b[1]))
@@ -86,7 +86,7 @@ class World:
 
     bin_size = 20
 
-    obstacles = {} # (i,j) -> bool 
+    obstacles = {} # (i,j) -> bool
 
     # paint no-obstacles over the map
     for i in range(self.width/bin_size):
@@ -187,7 +187,7 @@ class World:
 
 
   def eject_colliders(self, firsts, seconds, randomize=False, handler=None):
-    
+
     def eject(o1, o2):
       if o1 != o2:
         dx = o1.position[0] - o2.position[0]
@@ -434,7 +434,7 @@ class Nest(GameObject):
     self.radius = 100
     self.amount = 0.5
     self.color = 'orange'
-  
+
 class Obstacle(GameObject):
   """an impassable rocky obstacle"""
   def __init__(self, world):
@@ -461,7 +461,7 @@ class Slug(GameObject):
 
 class Mantis(GameObject):
   """indigenous lifeforms, mostly harmless"""
-  
+
   def __init__(self, world):
     super(Mantis, self).__init__(world)
     self.time_to_next_decision = 0
@@ -481,7 +481,7 @@ master.title("Tears of the Mantis: Legends of Xenocide")
 world = World(CANVAS_WIDTH, CANVAS_WIDTH)
 world.populate(p4_brains.world_specification, p4_brains.brain_classes)
 
-canvas = Tkinter.Canvas(master, width=CANVAS_WIDTH, height=CANVAS_HEIGHT) 
+canvas = Tkinter.Canvas(master, width=CANVAS_WIDTH, height=CANVAS_HEIGHT)
 canvas.pack()
 
 SIMULATION_TICK_DELAY_MS = 10.0
@@ -527,7 +527,7 @@ master.bind('<ButtonPress-1>', left_button_down)
 master.bind('<Double-Button-1>', left_button_double)
 master.bind('<B1-Motion>', left_button_move)
 master.bind('<ButtonRelease-1>', left_button_up)
-master.bind('<ButtonPress-2>', right_button_down)
+master.bind('<ButtonPress-3>', right_button_down)
 master.bind('<Key>', key_down)
 master.bind('<Escape>', lambda event: master.quit())
 
