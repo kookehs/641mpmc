@@ -103,4 +103,7 @@ def find_path(src, dst, mesh):
     else:
         print("No path!")
 
+    if path == []:
+        print("No path!")
+
     return path, discovered
