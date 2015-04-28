@@ -290,8 +290,10 @@ class World:
       candidates = self.objects_by_class[clazz]
     else:
       candidates = self.all_objects
-
-    return min(filter(where,candidates),key=lambda obj: field(obj.position))
+    if candidates:
+      return min(filter(where,candidates),key=lambda obj: field(obj.position))
+    else:
+      return None
 
 
   def issue_selection_order(self, order):
@@ -333,11 +335,12 @@ class ObjectFollower(Controller):
     self.target = target
 
   def update(self, obj, dt):
-    dx = self.target.position[0] - obj.position[0]
-    dy = self.target.position[1] - obj.position[1]
-    mag = math.sqrt(dx*dx+dy*dy)
-    obj.position = (obj.position[0] + dt*obj.speed*dx/mag,
-                    obj.position[1] + dt*obj.speed*dy/mag)
+    if obj and self.target:
+      dx = self.target.position[0] - obj.position[0]
+      dy = self.target.position[1] - obj.position[1]
+      mag = math.sqrt(dx*dx+dy*dy)
+      obj.position = (obj.position[0] + dt*obj.speed*dx/mag,
+                      obj.position[1] + dt*obj.speed*dy/mag)
 
 class FieldFollower(Controller):
   """behavior of descending a given distance field"""
