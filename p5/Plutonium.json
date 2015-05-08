@@ -1,0 +1,26 @@
+{
+  "Items": ["nickel", "dime", "quarter", "plutonium"],
+  "Initial": {"plutonium": 1},
+  "Goal": {"quarter": 1, "plutonium": 1},
+  "Recipes": {
+    "find nickel": {
+      "Produces": {"nickel": 1},
+      "Time": 60
+    },
+    "trade plutonium for dime": {
+      "Consumes": {"plutonium": 1},
+      "Produces": {"dime": 1},
+      "Time": 1
+    },
+    "make change for dime": {
+      "Consumes": {"nickel": 2},
+      "Produces": {"dime": 1},
+      "Time": 5
+    },
+    "make change for quarter": {
+      "Consumes": {"nickel": 1, "dime": 2},
+      "Produces": {"quarter": 1},
+      "Time": 5
+    }
+  }
+}
