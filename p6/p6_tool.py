@@ -32,7 +32,7 @@ def next_element(e):
 def display_design_on_canvas(canvas, design):
   canvas.delete(ALL)
 
-  
+
   width, height = design['width'], design['height']
   elements = design['elements']
   specials = design['specials']
@@ -84,13 +84,43 @@ def display_design_on_canvas(canvas, design):
 
   canvas.bind('<ButtonPress-1>',click)
   canvas.tag_bind('tile','<Enter>',enter)
-  
+
   try:
+    save_design(design)
     p6_analysis.analyze(design)
   except:
     print_exc()
 
-  
+def save_design(design):
+  open("temp.txt", "w").close()
+  outputFile = open("temp.txt", "w")
+  width = design["width"]
+  height = design["height"]
+  specials = design["specials"]
+  elements = design["elements"]
+
+  tileGrid = []
+
+  for i in range(height):
+      tileGrid.append([])
+
+      for j in range(width):
+        tileGrid[i].append("Z")
+
+  for i, j in elements:
+    tileGrid[j][i] = str(elements[(i, j)])
+
+  for i, j in specials:
+    tileGrid[j][i] = str(specials[(i, j)])
+
+  for i in range(height):
+      row = ""
+
+      for j in range(width):
+        row += str(tileGrid[i][j]) + " "
+
+      outputFile.write(row + "\n")
+
 
 def load_design(filename):
   with open(filename) as f:
@@ -113,7 +143,7 @@ def load_design(filename):
 
 def main(argv):
 
-  prog, filename = argv 
+  prog, filename = argv
   design = load_design(filename)
 
   master = Tk()
