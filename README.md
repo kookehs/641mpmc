@@ -10,3 +10,6 @@ p4 - Micro-RTS Unit Controller
 
 p5 - Mini-Minecraft Planner
 
+p6 - Reachability Analysis Visualization
+
+p7 - Constraint-based Level Generation
