@@ -1,4 +1,4 @@
-# 641mpmc
+# CMPM 146
 
 p1 - Dijkstra's in a Dungeon
 
